@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Carnet d'adresse</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="addressBook.js"></script>
+    </head>
+    <body ng-app="addressBookModule">
+        <div ng-controller="AddressBookCtrl as ctrl" class="container">
+            <h1>Carnet d'adresse</h1>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Nom</th>
+                        <th>Prénom</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="c in contacts track by $index">
+                        <td>{{$index + 1}}</td>
+                        <td>{{c.nom}}</td>
+                        <td>{{c.prenom}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <form ng-submit="newContact.nomSaisi && newContact.prenomSaisi && ajouter()">
+                <div class="form-group">
+                    <input class="form-control" type="text" ng-model="newContact.nomSaisi" placeholder="Nom" />
+                    <input class="form-control" type="text" ng-model="newContact.prenomSaisi" placeholder="Prénom" />
+                    <input class="btn btn-default" type="submit" value="Ajouter contact" />
+                </div>
+            </form>
+
+        </div>
+    </body>
+</html>

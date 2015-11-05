@@ -1,0 +1,51 @@
+<div class="container">
+    <bt-flash-alert type="success"></bt-flash-alert>
+    <p><span>Filter</span>  <input ng-model="searchText"></p>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>N°</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="c in contacts | filter:searchText | orderBy:'nom' track by $index ">
+                <td>{{$index + 1}}</td>
+                <td>{{c.nom}}</td>
+                <td>{{c.prenom}}</td>
+                <td>
+                    <button type="button" class="glyphicon glyphicon-list-alt" data-toggle="modal" data-target="#myModal" ng-click="save(c)"></button>
+                    <button class="glyphicon glyphicon-trash" ng-click="supprimer(c, $index)"></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Contact Edit</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="nom">Nom:</label>
+                        <input type="text" class="form-control" id="nom" ng-init="contactEdited.nom" ng-model="contactEdited.nom" />
+                    </div>
+                    <div class="form-group">
+                        <label for="prenom">Prenom:</label>
+                        <input type="text" class="form-control" id="prenom" ng-init="contactEdited.prenom" ng-model="contactEdited.prenom" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" ng-click="editer(c)">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
